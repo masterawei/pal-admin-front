@@ -16,18 +16,18 @@
               <el-col>
 
                 <el-menu
-                  default-active="1"
+                  :default-active="'/config'"
+                  router
                   class="el-menu-vertical-demo"
                   @open="handleOpen"
                   @close="handleClose">
-                  <el-submenu index="1" @open="handleOpen">
+                  <el-submenu index="/config" @open="handleOpen">
                     <template slot="title">
                       <i class="el-icon-location"></i>
                       <span>配置管理</span>
                     </template >
-                      <el-menu-item index="1-1">选项1</el-menu-item>
-                      <el-menu-item index="1-2">选项2</el-menu-item>
-                      <el-menu-item index="1-3">选项3</el-menu-item>
+                      <el-menu-item index="config/generation">配置生成</el-menu-item>
+                      <el-menu-item index="edit">配置修改</el-menu-item>
                   </el-submenu>
                 </el-menu>
 
@@ -38,7 +38,10 @@
 
 
 <!--          主区域-->
-          <el-main>Main</el-main>
+          <el-main>
+            <router-view/>
+
+          </el-main>
         </el-container>
       </el-container>
     </template>
@@ -51,9 +54,14 @@ export default {
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
+      console.log(this.$route.fullPath)
+      this.$router.push(key)
+
+
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+
     }
   }
 }
